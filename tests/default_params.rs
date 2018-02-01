@@ -1,34 +1,36 @@
-use harsh::HarshBuilder;
+extern crate harsh;
+
+use harsh::Harsh;
 
 const TEST_CASES: [(&'static str, &'static [u64]); 14] =
     [
-        ("nej1m3d5a6yn875e7gr9kbwpqol02q", &[0]),
-        ("dw1nqdp92yrajvl9v6k3gl5mb0o8ea", &[1]),
-        ("onqr0bk58p642wldq14djmw21ygl39", &[928728]),
-        ("18apy3wlqkjvd5h1id7mn5ore2d06b", &[1, 2, 3]),
-        ("o60edky1ng3vl9hbfavwr5pa2q8mb9", &[1, 0, 0]),
-        ("o60edky1ng3vlqfbfp4wr5pa2q8mb9", &[0, 0, 1]),
-        ("qek2a08gpl575efrfd7yomj9dwbr63", &[0, 0, 0]),
-        ("m3d5a6yn875rae8y81a94gr9kbwpqo", &[1000000000000]),
-        ("1q3y98ln48w96kpo0wgk314w5mak2d", &[9007199254740991]),
+        ("gY", &[0]),
+        ("jR", &[1]),
+        ("R8ZN0", &[928728]),
+        ("o2fXhV", &[1, 2, 3]),
+        ("jRfMcP", &[1, 0, 0]),
+        ("jQcMcW", &[0, 0, 1]),
+        ("gYcxcr", &[0, 0, 0]),
+        ("gLpmopgO6", &[1000000000000]),
+        ("lEW77X7g527", &[9007199254740991]),
         (
-            "op7qrcdc3cgc2c0cbcrcoc5clce4d6",
+            "BrtltWt2tyt1tvt7tJt2t1tD",
             &[5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
         ),
         (
-            "5430bd2jo0lxyfkfjfyojej5adqdy4",
+            "G6XOnGQgIpcVcXcqZ4B8Q8B9y",
             &[10000000000, 0, 0, 0, 999999999999999],
         ),
         (
-            "aa5kow86ano1pt3e1aqm239awkt9pk380w9l3q6",
+            "5KoLLVL49RLhYkppOplM6piwWNNANny8N",
             &[9007199254740991, 9007199254740991, 9007199254740991],
         ),
         (
-            "mmmykr5nuaabgwnohmml6dakt00jmo3ainnpy2mk",
+            "BPg3Qx5f8VrvQkS16wpmwIgj9Q4Jsr93gqx",
             &[1000000001, 1000000002, 1000000003, 1000000004, 1000000005],
         ),
         (
-            "w1hwinuwt1cbs6xwzafmhdinuotpcosrxaz0fahl",
+            "1wfphpilsMtNumCRFRHXIDSqT2UPcWf1hZi3s7tN",
             &[
                 1,
                 2,
@@ -55,13 +57,8 @@ const TEST_CASES: [(&'static str, &'static [u64]); 14] =
     ];
 
 #[test]
-fn custom_params() {
-    let harsh = HarshBuilder::new()
-        .salt("this is my salt")
-        .length(30)
-        .alphabet("xzal86grmb4jhysfoqp3we7291kuct5iv0nd")
-        .init()
-        .unwrap();
+fn default_params() {
+    let harsh = Harsh::default();
 
     for &(hash, values) in &TEST_CASES {
         assert_eq!(hash, harsh.encode(values).unwrap());
